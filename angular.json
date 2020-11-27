@@ -653,6 +653,32 @@
           }
         }
       }
+    },
+    "svelte-codegen": {
+      "root": "libs/svelte-codegen",
+      "sourceRoot": "libs/svelte-codegen/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/svelte-codegen/tsconfig.lib.json",
+              "libs/svelte-codegen/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/svelte-codegen/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/svelte-codegen/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {
