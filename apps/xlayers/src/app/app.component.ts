@@ -71,6 +71,10 @@ export class AppComponent {
         'assets/codegen/xamarinForms.svg'
       )
     );
+    iconRegistry.addSvgIcon(
+      'svelte',
+      sanitizer.bypassSecurityTrustResourceUrl('assets/codegen/svelte.svg')
+    );
 
     router.events
       .pipe(filter((event) => event instanceof NavigationEnd))

@@ -80,6 +80,11 @@ export class EditorContainerComponent implements OnInit, AfterContentInit {
     this.updateState();
   }
 
+  generateSvelte() {
+    this.codeSetting = this.codegen.generate(CodeGenKind.Svelte);
+    this.updateState();
+  }
+
   updateState() {
     this.store.dispatch(
       new CodeGen(

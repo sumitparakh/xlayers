@@ -12,6 +12,7 @@ import { UiState } from '../../../../core/state';
 import { environment } from '../../../../../environments/environment';
 import { CodeGenSettings } from '../../../../core/state/page.state';
 import { SketchMSLayer, SketchMSData } from '@xlayers/sketchtypes';
+import { SvelteCodegenService } from '@xlayers/svelte-codegen';
 
 declare var gtag;
 
@@ -52,6 +53,7 @@ export enum CodeGenKind {
   Stencil,
   LitElement,
   XamarinForms,
+  Svelte,
 }
 
 @Injectable({
@@ -70,6 +72,7 @@ export class CodeGenService {
     private readonly stencil: StencilCodeGenFacadeService,
     private readonly litElement: LitElementCodeGenFacadeService,
     private readonly xamarinForms: XamarinCodeGenService,
+    private readonly svelte: SvelteCodegenService,
     private readonly store: Store
   ) {
     this.store
