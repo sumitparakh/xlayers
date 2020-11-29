@@ -5,8 +5,6 @@ import { SketchMSData } from '@xlayers/sketchtypes';
   providedIn: 'root',
 })
 export class SvelteDocgenService {
-  constructor() {}
-
   aggregate(data: SketchMSData) {
     return [
       {
