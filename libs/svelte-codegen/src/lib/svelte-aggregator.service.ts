@@ -43,7 +43,7 @@ export class SvelteAggregatorService {
   private renderComponent(current: SketchMSLayer, html: string, css: string) {
     return `\
 <script>
-  export let ${this.formatService.normalizeName(current.name)};
+  export let ${this.formatService.className(current.name)};
 </script>
     
 ${html}
@@ -60,7 +60,7 @@ ${html}
     const app = new App({
       target: document.body,
       props: {
-        // // ${current.name}: ''
+        ${this.formatService.className(current.name)}: ''
       }
     })
 

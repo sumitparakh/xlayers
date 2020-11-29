@@ -4,6 +4,7 @@ import {
   SvelteCodegenService,
   SvelteDocgenService,
 } from '@xlayers/svelte-codegen';
+import { XlayersNgxEditorModel } from './codegen.service';
 
 @Injectable({
   providedIn: 'root',
@@ -20,5 +21,9 @@ export class SvelteCodeGenFacadeService {
     };
   }
 
-  generate(data: SketchMSData) {}
+  generate(data: SketchMSData) {
+    return this.svelteDocGen
+      .aggregate(data)
+      .concat(this.svelteCodeGen.aggregate(data)) as XlayersNgxEditorModel[];
+  }
 }
