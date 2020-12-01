@@ -28,7 +28,8 @@ export interface XlayersNgxEditorModel {
     | 'litElement'
     | 'html'
     | 'text'
-    | 'xamarinForms';
+    | 'xamarinForms'
+    | 'svelte';
   uri: string;
   value: any;
   language: string;
