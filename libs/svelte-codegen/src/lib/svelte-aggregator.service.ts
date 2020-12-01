@@ -27,12 +27,6 @@ export class SvelteAggregatorService {
     return [
       {
         kind: 'svelte',
-        value: this.renderMainScript(current, options),
-        language: 'javascript',
-        uri: `${options.componentDir}/main.js`,
-      },
-      {
-        kind: 'svelte',
         value: this.renderComponent(current, html.value, css.value),
         language: 'html',
         uri: `${options.componentDir}/${fileName}.svelte`,
@@ -41,11 +35,7 @@ export class SvelteAggregatorService {
   }
 
   private renderComponent(current: SketchMSLayer, html: string, css: string) {
-    return `\
-<script>
-  export let ${this.formatService.className(current.name)};
-</script>
-    
+    return `\    
 ${html}
 
 <style>
@@ -54,31 +44,15 @@ ${html}
   }
 
   private renderMainScript(current: SketchMSLayer, options: WebCodeGenOptions) {
-    return `\
-    
+    const fileName = this.formatService.normalizeName(current.name);
 
-    const app = new App({
-      target: document.body,
-      props: {
-        ${this.formatService.className(current.name)}: ''
-      }
-    })
+    return `\
+import App from "./${options.componentDir + '/' + fileName}.svelte";
+    
+const app = new App({
+  target: document.body
+});
 
     `;
-  }
-
-  private renderImportStatements(current: SketchMSLayer) {
-    return [...this.generateDynamicImport(current)].join('\n');
-  }
-
-  private generateDynamicImport(current: SketchMSLayer) {
-    const context = this.webCodeGenService.context(current);
-    return context && context.components
-      ? context.components.map((component) => {
-          const importclassName = this.formatService.className(component);
-          const importFileName = this.formatService.normalizeName(component);
-          return `import { ${importclassName} } from "./${importFileName}"; `;
-        })
-      : [];
   }
 }

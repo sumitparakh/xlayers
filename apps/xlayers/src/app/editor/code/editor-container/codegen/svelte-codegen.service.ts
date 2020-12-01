@@ -17,7 +17,7 @@ export class SvelteCodeGenFacadeService {
 
   buttons() {
     return {
-      stackblitz: true,
+      stackblitz: false,
     };
   }
 

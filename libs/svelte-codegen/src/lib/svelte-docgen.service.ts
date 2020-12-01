@@ -22,6 +22,21 @@ export class SvelteDocgenService {
 
 1. Download and extract the exported module into your workspace,
 
+2. Import the svelte component into your main js file:
+
+\`\`\`javascript
+import App from "./components/page-1.svelte";
+
+
+const app = new App({
+  target: document.body,
+  data: {}
+});
+\`\`\`
+
+>  For more information about [Svelte](https://svelte.dev/)
+
+
     `;
   }
 }
