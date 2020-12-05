@@ -6,7 +6,10 @@ describe('SvelteCodegenService', () => {
   let service: SvelteCodegenService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [SvelteCodegenService],
+    });
+
     service = TestBed.inject(SvelteCodegenService);
   });
 

@@ -27,9 +27,14 @@ describe('SvelteAggregatorService', () => {
             aggregate: () => [
               {
                 kind: 'svelte',
-                value: '<span></span>',
+                value: '.aclass {width: 20px;}',
+                language: 'css',
+              },
+              {
+                kind: 'svelte',
+                value: '<span>attr</span>',
                 language: 'html',
-                uri: 'components/page-1.svelte',
+                uri: 'components/abc.svelte',
               },
             ],
           },
@@ -41,5 +46,46 @@ describe('SvelteAggregatorService', () => {
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+  });
+
+  it('should have three files for a basic svelte component', () => {
+    const data = {
+      _class: 'rectangle',
+      name: 'abc',
+      web: {},
+
+      layers: [
+        {
+          _class: 'text',
+          css: {
+            className: 'aclass',
+            rules: {
+              width: '20px',
+            },
+          },
+          web: {},
+          attributedString: { string: 'attr' },
+        },
+      ],
+    } as any;
+    const aggregated = service.aggregate(data, data, {
+      textTagName: 'span',
+      bitmapTagName: 'img',
+      blockTagName: 'div',
+      xmlPrefix: 'xly-',
+      cssPrefix: 'xly_',
+      componentDir: 'components',
+      assetDir: 'assets',
+    });
+
+    expect(aggregated.length).toEqual(1);
+
+    const [component] = aggregated;
+    expect(component.kind).toEqual('svelte');
+    expect(component.language).toEqual('html');
+    console.log({ value: component.value });
+    expect(component.value.includes('<span>attr</span>')).toBeTruthy();
+    expect(component.value.includes('.aclass {width: 20px;}')).toBeTruthy();
+    expect(component.uri).toEqual('components/abc.svelte');
   });
 });
