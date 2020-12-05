@@ -35,7 +35,7 @@ export class SvelteAggregatorService {
   }
 
   private renderComponent(current: SketchMSLayer, html: string, css: string) {
-    return `\    
+    return `   
 ${html}
 
 <style>
